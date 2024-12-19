@@ -119,7 +119,7 @@ export class FindJump {
 		if (extensionConfig.jumpCursorPosition === 'selection+1') {
 			const r = range['start'];
 			line = r.line;
-			character = r.character + 1;
+			character = r.character + (selectionForward ? 1 : 0);
 		} else {
 			const cursorPosition = extensionConfig.jumpCursorPosition !== 'selection-end'
 				? extensionConfig.jumpCursorPosition
