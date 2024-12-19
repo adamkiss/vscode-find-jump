@@ -109,10 +109,25 @@ export class FindJump {
 			return;
 		}
 
-		const cursorPosition = extensionConfig.jumpCursorPosition !== 'selection-end'
-			? extensionConfig.jumpCursorPosition
-			: this.activatedWithSelection ? 'end' : 'start';
-		const { line, character } = range[cursorPosition];
+		const befLine = this.textEditor.selection.start.line;
+		const befChar = this.textEditor.selection.start.character;
+		const aftLine = range['start'].line;
+		const aftChar = range['start'].character;
+		const selectionForward = (aftLine*1000+aftChar) >= (befLine*1000+befChar)
+
+		let line, character;
+		if (extensionConfig.jumpCursorPosition === 'selection+1') {
+			const r = range['start'];
+			line = r.line;
+			character = r.character + 1;
+		} else {
+			const cursorPosition = extensionConfig.jumpCursorPosition !== 'selection-end'
+				? extensionConfig.jumpCursorPosition
+				: (this.activatedWithSelection && selectionForward) ? 'end' : 'start';
+			const r = range[cursorPosition];
+			line = r.line;
+			character = r.character;
+		}
 
 		this.textEditor.selection = new Selection(
 			this.activatedWithSelection ? this.textEditor.selection.start.line : line,

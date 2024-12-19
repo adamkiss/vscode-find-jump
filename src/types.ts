@@ -5,7 +5,7 @@ export interface ExtensionConfig {
 	positionAbsolute: boolean;
 	dimWhenActive: boolean;
 	activateToToggle: boolean;
-	jumpCursorPosition: 'end' | 'start' | 'selection-end';
+	jumpCursorPosition: 'end' | 'start' | 'selection-end' | 'selection+1';
 
 	letterBackground: string;
 	letterForeground: string;

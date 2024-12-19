@@ -80,7 +80,8 @@
 					"enum": [
 						"start",
 						"end",
-						"selection-end"
+						"selection-end",
+						"selection+1"
 					],
 					"description": "Place where to jump cursor.",
 					"enumDescriptions": [
